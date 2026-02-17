@@ -113,13 +113,13 @@ export const useMakePayment = () => {
 export const useLogin = () => {
   return useMutation<ApiResponse<string>, Error, { email: string; password: string }>({
     mutationFn: (credentials: { email: string; password: string }) =>
-      axiosInstance.post("/users/login", credentials),
+      axiosInstance.post<ApiResponse<string>>("/users/login", credentials).then((res) => res.data),
   });
 };
 
 export const useRegister = () => {
   return useMutation<ApiResponse<null>, Error, { name: string; email: string; password: string }>({
     mutationFn: (data: { name: string; email: string; password: string }) =>
-      axiosInstance.post("/users/register", data),
+      axiosInstance.post<ApiResponse<null>>("/users/register", data).then((res) => res.data),
   });
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../helpers/axiosInstance";
+import axiosInstance from "../helpers/axiosInstance"; // used for fetching user info after login
 import { loginSchema, LoginForm } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -32,13 +32,20 @@ const Login: React.FC = () => {
         const token = response.data as string; // token is returned as data
         localStorage.setItem("token", token);
         // fetch user info
-        const userRes = await axiosInstance.get("/users/get-user-by-id", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if ((userRes.data as any)?.success) {
-          setUser((userRes.data as any).data, token);
+        // get user details by POST (backend expects POST)
+        try {
+          const userRes = await axiosInstance.post("/users/get-user-by-id", {}, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if ((userRes.data as any)?.success) {
+            setUser((userRes.data as any).data, token);
+          }
+        } catch (userErr) {
+          // if fetching user fails we still redirect; token is stored
+          console.warn("Failed to fetch user info after login", userErr);
         }
-        window.location.href = "/";
+        // navigate after attempt
+        navigate("/");
       } else {
         message.error(response?.message || "Login failed");
       }

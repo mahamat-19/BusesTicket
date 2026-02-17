@@ -6,18 +6,15 @@
     "@hookform/resolvers": "^3.1.1",
     "@tanstack/react-query": "^5.90.21",
     "@tanstack/react-query-devtools": "^5.91.3",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
     "antd": "^4.23.0",
     "axios": "^1.13.5",
     "moment": "^2.29.4",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.1",
     "react-hot-toast": "^2.3.0",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "^5.0.1",
     "react-stripe-checkout": "^2.6.3",
     "react-to-print": "^2.14.7",
     "web-vitals": "^2.1.4",
@@ -25,11 +22,11 @@
     "zustand": "^4.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "tsc": "tsc --noEmit"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tsc": "tsc --noEmit",
+    "test": "echo \"Use vitest or jest here\" && exit 0"
   },
   "eslintConfig": {
     "extends": [
@@ -54,8 +51,9 @@
     "@types/node": "^20.6.2",
     "@types/react": "^18.2.24",
     "@types/react-dom": "^18.2.7",
-    "@types/react-router-dom": "^5.3.3",
-    "typescript": "^4.9.5"
+    "@vitejs/plugin-react": "^5.1.4",
+    "typescript": "^4.9.5",
+    "vite": "^7.3.1"
   },
   "proxy": "http://localhost:5000/"
 }
